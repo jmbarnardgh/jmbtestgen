@@ -3,5 +3,5 @@ public struct TestSuiteMember {
     public var type: String
     public var description: String
     
-    public var testTemplates: [TestTemplate]
+    public var testables: [TestAspect]
 }

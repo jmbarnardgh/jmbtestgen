@@ -6,10 +6,10 @@ public struct TestSuiteManifest {
     public func writeTestSuite() {
         for entity in entities {
             for member in entity.members {
-                for template in member.testTemplates {
-                    print(template.boundaryTestsSource)
-                    print(template.quartileTestsSource)
-                    print(template.membershipTestsSource)
+                for t in member.testables {
+                    print(t.boundaryTestsSource)
+                    print(t.quartileTestsSource)
+                    print(t.membershipTestsSource)
                 }
             }
         }

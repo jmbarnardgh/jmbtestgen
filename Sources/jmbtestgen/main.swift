@@ -11,8 +11,12 @@ let manifest = TestSuiteManifest(
                     name: "myMethod",
                     type: "method",
                     description: "my method that I made",
-                    testTemplates: [
-                        TestTemplate(strings: ["abc123"])
+                    testables: [
+                        TestAspect(
+                            name: "param1",
+                            role: .parameter,
+                            attribute: .length
+                        )
                     ]
                 )
             ]
