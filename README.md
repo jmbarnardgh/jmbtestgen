@@ -1,3 +1,3 @@
-# jsontestgen
+# JMBTestGen
 
-Converts a test plan spec written in JSON to actual unit tests using language-specific templates.
+An XCTest tests generator for Swift entities. More coming soon...
