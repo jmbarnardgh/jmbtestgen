@@ -1,6 +1,6 @@
 import Foundation
 
-extension TestSuiteMember {
+extension Member {
 
     var methodSourceCodeTemplate: String {
         return "" // TODO: Implement me!
@@ -9,15 +9,16 @@ extension TestSuiteMember {
     public func generate(to relativeOutputDirectory: String) {
         print("Member began generating...")
         switch type {
-            case .method: return sourceForMethod()
-            default: return ""
+            // TODO: Finish implementing me!
+            case .method: print(sourceForMethod())  // SourceCodeWriter.write(contents: sourceForMethod(), to: relativeOutputDirectory) 
+            default: return // TODO: deal with error...
         }
         print("Done generating from member.")
     }
 
     /**
       Generates `XCTest` source code for method testing if the current
-      member type is of type `TestSuiteMemberType.method`.
+      member type is of type `MemberType.method`.
 
       Loops through all the `aspects` of `self` (a `Memeber` object) and
       generates source code useful for testing the member (again, represented
@@ -25,29 +26,19 @@ extension TestSuiteMember {
       source code comprises a list of tests, which are executable using the
       `XCTest` framework.
 
-      - see: `TestSuiteMember`
-      - see: `TestSuiteMemberType`
+      - see: `Member`
+      - see: `MemberType`
      */
     public func sourceForMethod() -> String {
-        var testMethodCode: String = ""
+        var sourceCode: String = ""
         guard type == .method else { 
             fatalError("Request source for method type Member, but got something else instead.")
         }
         for aspect in aspects {
             // Go through all motifs and generate appropriate code...
-            testMethodCode.append(
-                TestBuilder(
-                    name: aspect.name,
-                    memberType: type,
-                    testing: aspect.role
-                )
-            )
-            if aspect.role == .parameter {
-
-            }
             for motif in aspect.motifs {
-                if let m = motif as? StringLengthTestMotif {
-
+                for extrapolation in motif.extrapolatedTests(aspect: aspect) {
+                    sourceCode += extrapolation
                 }
             }
         }

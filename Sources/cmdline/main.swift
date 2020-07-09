@@ -1,17 +1,20 @@
-TestSuiteManifest(
+import jmbtestgen
+
+Manifest(
     entities: [
-        TestSuiteEntity(
-            name: "MyTestSuite",
+        Entity(
+            name: "MyEntity",
             members: [
-                TestSuiteMember(
+                Member(
                     name: "myMethod",
                     type: .method,
                     description: "my method that I made",
-                    tryable: true,
+                    tryable: false,
                     aspects: [
-                        TestAspect(
+                        Member.Aspect(
                             name: "param1",
                             role: .parameter,
+                            dataType: .string,
                             motifs: [
                                 .lengthBoundaries(lower: 3, upper: 10),
                                 .regularExpressionConformity(pattern: "^[a-zA-Z]$")

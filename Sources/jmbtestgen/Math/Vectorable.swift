@@ -1,4 +1,3 @@
-
 /**
  A generic vector with direction, magnitude and content.
  */

@@ -1,6 +1,6 @@
 import Foundation
 
-extension TestSuiteEntity {
+extension Entity {
     public func generate(to relativeOutputDirectory: String) {
         // TODO: Generate header boilderplate for the member's tests
         for member in members {

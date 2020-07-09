@@ -10,7 +10,5 @@
 
         [METHOD_RESULTS_IF_ANY]
 
-        [VAR_TESTING_IF_ANY]
-
-        
+        [VAR_TESTING_IF_ANY]   
     }

@@ -1,4 +1,4 @@
-public enum TestSuiteMemberType {
+public enum MemberType {
     case method
     case variable
 }

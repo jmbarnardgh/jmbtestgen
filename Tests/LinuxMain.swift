@@ -1,7 +1,7 @@
 import XCTest
 
-import jsontestgenTests
+import jmbtestgenTests
 
 var tests = [XCTestCaseEntry]()
-tests += jsontestgenTests.allTests()
+tests += jmbtestgenTests.allTests()
 XCTMain(tests)
