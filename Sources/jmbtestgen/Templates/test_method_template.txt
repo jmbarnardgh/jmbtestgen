@@ -1,0 +1,16 @@
+    func test_[TESTNUMBER]_[MEMBERNAME]_[ASPECTTYPE]_[MOTIF]_[VARIATION]() {
+
+        print("Unit Test: [TESTNUMBER]")
+        print("Member:    [MEMBERNAME]")
+        print("Aspect:    [ASPECTTYPE]")
+
+        var valid: Bool = false
+
+        [INPUTS_VARS_IF_ANY]
+
+        [METHOD_RESULTS_IF_ANY]
+
+        [VAR_TESTING_IF_ANY]
+
+        
+    }

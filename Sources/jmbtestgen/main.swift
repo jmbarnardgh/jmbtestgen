@@ -1,21 +1,21 @@
-
-import ArgumentParser
-import Foundation
-
-let manifest = TestSuiteManifest(
+TestSuiteManifest(
     entities: [
         TestSuiteEntity(
             name: "MyTestSuite",
             members: [
                 TestSuiteMember(
                     name: "myMethod",
-                    type: "method",
+                    type: .method,
                     description: "my method that I made",
-                    testables: [
+                    tryable: true,
+                    aspects: [
                         TestAspect(
                             name: "param1",
                             role: .parameter,
-                            attribute: .length
+                            motifs: [
+                                .lengthBoundaries(lower: 3, upper: 10),
+                                .regularExpressionConformity(pattern: "^[a-zA-Z]$")
+                            ]
                         )
                     ]
                 )
@@ -23,5 +23,4 @@ let manifest = TestSuiteManifest(
         )
     ]
 )
-
-manifest.writeTestSuite()
+.generate(to: "output/directory")

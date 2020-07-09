@@ -1,5 +1,5 @@
 import XCTest
-@testable import jsontestgen
+@testable import jmbtestgen
 
 final class jsontestgenTests: XCTestCase {
     func testExample() {
@@ -7,6 +7,10 @@ final class jsontestgenTests: XCTestCase {
         let magnitude: Int = 15
         XCTAssertTrue(magnitude == 15)
         print("end of tests")
+    }
+
+    func test_templateExample_testName() {
+        
     }
 
     static var allTests = [

@@ -1,7 +1,8 @@
 public struct TestSuiteMember {
     public var name: String
-    public var type: String
+    public var type: TestSuiteMemberType
     public var description: String
-    
-    public var testables: [TestAspect]
+    public var tryable: Bool
+
+    public var aspects: [TestAspect]
 }

@@ -1,4 +1,4 @@
-extension String: Testable {
+extension String: Quartileable, Vectorable {
 
     public typealias LimitableType = String
     public typealias LimitType = String.Index
@@ -36,21 +36,6 @@ extension String: Testable {
     public var vectorDirection: Direction   { return .grow }
     public var vectorContent:   ContentType { return self  }
 
-    public var limitableContent: String { return self }
-
-    // Default is one lower-bound limit: the start index.
-    public func limits() -> [LimitType] { return [limitableContent.startIndex] }
-
-    
-    public func quartileTests() -> [String] { 
-        // TODO: Finish implementation...
-        return quartiles()
-    }
-
-    public func boundaryTests() -> [String] {
-        // TODO: Finish implementation...
-        return []
-    }
 }
 
 infix operator .-.
