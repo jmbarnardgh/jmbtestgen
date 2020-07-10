@@ -15,8 +15,7 @@
 public protocol Motif {
     var type: MotifType { get }
     var description: String { get }
-    func extrapolatedTests(aspect: Member.Aspect) -> [String]
-    static func nextNumber() -> Int
+    func extrapolatedTests(aspect: Member.Aspect) -> String
 }
 
 public enum MotifType {
@@ -37,6 +36,11 @@ public struct MotifError: Error {
 }
 
 public struct MotifFactory {
+
+    public static var num: Int = 0
+    public static func nextNumber() {
+        num = num + 1
+    }
 
     public static func motif(for motifType: MotifType) -> Motif {
         switch motifType {

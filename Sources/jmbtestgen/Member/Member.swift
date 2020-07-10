@@ -1,3 +1,8 @@
+public enum MemberType {
+    case method
+    case variable
+}
+
 /**
  A member of an `Entity`, such as a method, variable, etc.
  
@@ -20,9 +25,8 @@ public struct Member {
     }
 
     static var num: Int = 0
-    public static func nextNumber() -> Int {
+    public static func nextNumber() {
         num = num + 1
-        return num
     }
 
     public enum AspectDataType {
@@ -47,9 +51,8 @@ public struct Member {
         var motifs: [Motif]
 
         static var num: Int = 0
-        public static func nextNumber() -> Int {
+        public static func nextNumber() {
             num = num + 1
-            return num
         }
         
         public init(name: String, role: AspectRole, dataType: AspectDataType, motifs: [MotifType]) {

@@ -1,9 +1,8 @@
 public struct Entity {
 
     static var num: Int = 0
-    public static func nextNumber() -> Int {
+    public static func nextNumber() {
         num = num + 1
-        return num
     }
 
     public static var current: Entity? = nil

@@ -18,32 +18,24 @@ public struct RegularExpressionConformityMotif: Motif {
         }
     }
     
-    static var num: Int = 0
-    public static func nextNumber() -> Int {
-        num = num + 1
-        return num
-    }
-
-    public func extrapolatedTests(aspect: Member.Aspect) -> [String] {
-        var sources: [String] = []
+    public func extrapolatedTests(aspect: Member.Aspect) -> String {
+        var source: String = ""
         switch aspect.dataType {
         case .string:
             if aspect.role == .parameter {
                 let variation = "regexConformity"
-                var source: String = ""
                 source.append("func ")
                 source.append("test_")
                 source.append("\(Entity.num)_")
                 source.append("\(Member.num)_")
                 source.append("\(Member.Aspect.num)_")
-                source.append("\(Self.num)_")
+                source.append("\(MotifFactory.num)_")
                 source.append("\(variation) {\n")
                 source.append("<#code#>\n")
                 source.append("}\n\n")
-                sources.append(source)
             }
         default: fatalError("aspect type not recognized for \(#function)")            
         }
-        return sources
+        return source
     }
 }

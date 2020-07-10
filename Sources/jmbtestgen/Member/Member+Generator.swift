@@ -35,11 +35,17 @@ extension Member {
             fatalError("Request source for method type Member, but got something else instead.")
         }
         for aspect in aspects {
+            Member.Aspect.nextNumber()
             // Go through all motifs and generate appropriate code...
             for motif in aspect.motifs {
-                for extrapolation in motif.extrapolatedTests(aspect: aspect) {
-                    sourceCode += extrapolation
+                MotifFactory.nextNumber()
+                switch motif {
+                    case is StringLengthMotif: sourceCode += String((motif as? StringLengthMotif)!.extrapolatedTests(aspect: aspect))
+                    case is RegularExpressionConformityMotif: sourceCode += String((motif as? RegularExpressionConformityMotif)!.extrapolatedTests(aspect: aspect))
+                    default: fatalError("Could not decipher motif.")
                 }
+                // let extrapolations =  motif.extrapolatedTests(aspect: aspect)
+                // sourceCode += String(extrapolations)
             }
         }
         return sourceCode
