@@ -1,5 +1,5 @@
 /**
- A generic vector with direction, magnitude and content.
+ A generalized vector with direction, magnitude and content.
  */
 public protocol Vectorable  {
 

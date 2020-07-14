@@ -16,6 +16,8 @@ public struct Member {
 
     public var aspects: [Aspect]
 
+    public static var shared: Member? = nil
+
     public init(name: String, type: MemberType, description: String, tryable: Bool, aspects: [Aspect]) {
         self.name = name
         self.type = type
@@ -45,6 +47,7 @@ public struct Member {
     }
 
     public struct Aspect {
+        
         var name: String
         var role: AspectRole
         var dataType: AspectDataType
@@ -65,5 +68,7 @@ public struct Member {
                 self.motifs.append(motif)
             }
         }
+
+        
     }
 }

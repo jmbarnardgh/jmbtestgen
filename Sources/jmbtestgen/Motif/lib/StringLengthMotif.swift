@@ -1,5 +1,15 @@
 public struct StringLengthMotif: Motif, Quartileable {
 
+    public var dependencies: [Motif]  {
+        return []
+    }
+    
+    private static var shared: Motif?
+
+    public static func currentMotif() -> Motif? {
+        return shared
+    }
+
     public typealias QuartileableContent = String
     
     public typealias Quartile = String
@@ -38,25 +48,12 @@ public struct StringLengthMotif: Motif, Quartileable {
 
     public var description: String { return "stringLength" }
 
-    public func extrapolatedTests(aspect: Member.Aspect) -> String {
-        var source: String = ""
-        switch aspect.dataType {
-        case .string:
-            if aspect.role == .parameter {
-                let variation = "lengthBoundary"
-                source.append("func ")
-                source.append("test_")
-                source.append("\(Entity.num)_\(Entity.current!.name)_")
-                source.append("\(Member.num)_")
-                source.append("\(Member.Aspect.num)_")
-                source.append("\(MotifFactory.num)_")
-                source.append("\(variation) {\n")
-                source.append("<#code#>\n")
-                source.append("}\n\n")
-            }
-        default: fatalError("aspect type not recognized for \(#function)")            
-        }
-        return source
+    public var idealVariation: Variation { 
+        // TODO: finish implementing me!
+        return Variation(variableNameModifier: "String", description: "String", validityVariableSetting: "String", validityExpectation: "String", value: "String")
     }
 
+    public var variations: [Variation] {
+        return []
+    }
 }

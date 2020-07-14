@@ -5,10 +5,11 @@ public struct Entity {
         num = num + 1
     }
 
-    public static var current: Entity? = nil
+    public static var shared: Entity? = nil
 
     public var name: String
     public var members: [Member]
+    
     public init(name: String, members: [Member]) {
         self.name = name
         self.members = members

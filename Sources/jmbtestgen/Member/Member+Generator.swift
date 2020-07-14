@@ -41,11 +41,9 @@ extension Member {
                 MotifFactory.nextNumber()
                 switch motif {
                     case is StringLengthMotif: sourceCode += String((motif as? StringLengthMotif)!.extrapolatedTests(aspect: aspect))
-                    case is RegularExpressionConformityMotif: sourceCode += String((motif as? RegularExpressionConformityMotif)!.extrapolatedTests(aspect: aspect))
+                    case is PatternConformityMotif: sourceCode += String((motif as? PatternConformityMotif)!.extrapolatedTests(aspect: aspect))
                     default: fatalError("Could not decipher motif.")
                 }
-                // let extrapolations =  motif.extrapolatedTests(aspect: aspect)
-                // sourceCode += String(extrapolations)
             }
         }
         return sourceCode
