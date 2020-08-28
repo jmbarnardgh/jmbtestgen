@@ -1,7 +1,8 @@
 public struct StringLengthMotif: Motif, Quartileable {
 
+    var patternConformityMotifs: [PatternConformityMotif] = []
     public var dependencies: [Motif]  {
-        return []
+        return patternConformityMotifs
     }
     
     private static var shared: Motif?
@@ -9,7 +10,7 @@ public struct StringLengthMotif: Motif, Quartileable {
     public static func currentMotif() -> Motif? {
         return shared
     }
-
+    
     public typealias QuartileableContent = String
     
     public typealias Quartile = String
