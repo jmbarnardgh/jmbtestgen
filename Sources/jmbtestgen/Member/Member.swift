@@ -26,9 +26,15 @@ public struct Member {
         self.aspects = aspects
     }
 
-    static var num: Int = 0
+    static var num: Int = -1
     public static func nextNumber() {
         num = num + 1
+        resetTestNumberingValueForSubordinates()
+    }
+
+    public static func resetTestNumberingValueForSubordinates() {
+        Member.Aspect.num = -1
+        Member.Aspect.resetTestNumberingValueForSubordinates()
     }
 
     public enum AspectDataType {
@@ -53,11 +59,17 @@ public struct Member {
         var dataType: AspectDataType
         var motifs: [Motif]
 
-        static var num: Int = 0
+        static var num: Int = -1
+
         public static func nextNumber() {
             num = num + 1
+            resetTestNumberingValueForSubordinates()
         }
-        
+
+        public static func resetTestNumberingValueForSubordinates() {
+            Variation.num = -1
+        }
+
         public init(name: String, role: AspectRole, dataType: AspectDataType, motifs: [MotifType]) {
             self.name = name
             self.role = role
@@ -67,8 +79,6 @@ public struct Member {
                 let motif = MotifFactory.motif(for: type)
                 self.motifs.append(motif)
             }
-        }
-
-        
+        }        
     }
 }

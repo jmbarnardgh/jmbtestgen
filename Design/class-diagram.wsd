@@ -1,0 +1,103 @@
+@startuml
+
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Gray
+    FontStyle Bold
+}
+
+skinparam stereotypeCBackgroundColor Clear
+hide <<protocol>> circle
+hide <<struct>> circle
+
+class Motif <<protocol>> {
+    <i>Represents a given testing motif, such as boundary testing,
+    <i>regular expression conformity testing, etc.
+    --
+    * type: MotifType
+    * description: String
+    * idealVariation: Variation
+    * variations: [Variation]
+    * func extrapolatedTests(aspect: Member.Aspect) -> String
+    * static func currentMotif() -> Motif?
+    * var dependencies: [Motif]
+    ..
+    * static currentMotif() : Motif? 
+    * extrapolatedTests(aspect: Member.Aspect) : String
+}
+
+class Variation <<struct>> {
+    <i>Represents a variation in the parameters of a
+    <i>testable aspect of a member according to a motif.
+    --
+    * var variableNameModifier: String
+    * var description: String
+    * var validityVariableSetting: String = "false"
+    * var validityExpectation: String
+    * var value: String
+    ..
+    + static shared : Variation?
+    * static num: Int
+    + static nextNumber() : Int
+}
+
+class Manifest <<struct>> {
+    <i>Represents the top level of test information for a test suite.
+    <i>Contains a list of `Entity` values.
+    --
+    + entities : [Entity]
+}
+
+class Entity <<struct>> {
+    <i>Represents a testable entity in the source code to be tested
+    <i>(e.g. a class, struct, protocol, object, etc.)
+    <i>Contains a list of `Member` values.
+    --
+    + name : String
+    + members : [Member]
+    ..
+    * static num : Int <i>// for numbering entities when generating test suite
+}
+
+class Member <<struct>> {
+    <i> A member of an `Entity`, such as a method, variable, etc.
+    --
+    + name : String
+    + type : MemberType
+    + description: String
+    + tryable : Bool
+    + aspects : [Aspect]
+    --
+    * static shared : Member?
+}
+
+class Member.Aspect <<struct>> {
+    * name : String
+    * role : AspectRole
+    * dataType : AspectDataType
+    * motifs : [Motif]
+    --
+    * static num : Int <i>// for numbering member aspects when generating test suite
+}
+
+class StringLengthMotif <<struct>> {
+
+}
+
+class PatternConformityMotif <<struct>> {
+
+}
+
+
+Manifest "1..1" o-- "0..*" Entity
+Entity "1..1" o-- "0..*" Member
+Member "1..1" o-- "0..*" Member.Aspect
+Member.Aspect "1..1" o-- "0..*" Motif
+
+Motif "1..1" o-- "0..*" Variation
+
+StringLengthMotif --|> Motif
+PatternConformityMotif --|> Motif
+
+@enduml

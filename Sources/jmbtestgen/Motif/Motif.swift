@@ -27,23 +27,27 @@ extension Motif {
     public func extrapolatedTests(aspect: Member.Aspect) -> String {
         var source: String = ""
         for variation in variations {
+            Variation.nextNumber()
             switch aspect.dataType {
             case .string:
                 if aspect.role == .parameter {
-                    let motifType = self.type.described()
+                    let motifTypeHumanDescription = self.type.described()
+                    let motifTypeMethodNameAddendum = self.type.testMethodDescription()
+                    source.append("/// Test \(Entity.num).\(Member.num).\(Member.Aspect.num).\(Variation.num)\n")
+                    source.append("/// \n")                    
+                    source.append("/// `\(Entity.shared!.name).\(Member.shared!.name)` should have \(aspect.role) `\(aspect.name)` \(variation.description) for \(motifTypeHumanDescription).\n")
                     source.append("func ")
                     source.append("test_")
                     source.append("\(Entity.num)_")
                     source.append("\(Member.num)_")
                     source.append("\(Member.Aspect.num)_")
-                    source.append("\(MotifFactory.num)_")
                     source.append("\(Variation.num)_")
                     source.append("\(Entity.shared!.name)_")
                     source.append("\(Member.shared!.name)_")
-                    source.append("\(Variation.shared?.variableNameModifier)")
-                    source.append("\(motifType)_")
+                    source.append("\(motifTypeMethodNameAddendum)_")
+                    source.append("\(variation.variableNameModifier)() ")
                     source.append("{\n")
-                    source.append("<#code#>\n")
+                    source.append("    <#code#>\n")
                     source.append("}\n\n")
                 }
             default: fatalError("aspect type not recognized for \(#function)")            
@@ -66,6 +70,17 @@ public enum MotifType {
     case directionalState(state: Signum)
 
     public func described() -> String {
+        switch self {
+            case .lengthBoundaries(_, _): return "length boundaries"
+            case .regularExpressionConformity(pattern: _): return "regular expression conformity"
+            case .exactMatch(value: _): return "exact match"
+            case .exactNonMatch(value: _): return "exact non-match"
+            case .directionalChange(changedTo: _): return "directional change"
+            case .directionalState(state: _): return "directional state"
+        }
+    }
+
+    public func testMethodDescription() -> String {
         switch self {
             case .lengthBoundaries(_, _): return "lengthBoundaries"
             case .regularExpressionConformity(pattern: _): return "regularExpressionConformity"
@@ -92,7 +107,10 @@ public struct MotifFactory {
         switch motifType {
         case .lengthBoundaries: return StringLengthMotif(motifType)
         case .regularExpressionConformity: return PatternConformityMotif(motifType)
+        case .exactMatch:
+            let motif = ExactMatchMotif(motifType)
+            return motif
         default: fatalError("Could not generate a proper motif for provided motif type.")
         }
-    }
+    }    
 }

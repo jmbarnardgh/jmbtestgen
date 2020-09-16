@@ -6,6 +6,7 @@ extension Entity {
         for member in members {
             Member.shared = member
             Member.nextNumber()
+            Member.resetTestNumberingValueForSubordinates()
             member.generate(to: relativeOutputDirectory)
         }
     }

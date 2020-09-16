@@ -7,13 +7,12 @@ extension Member {
     }
 
     public func generate(to relativeOutputDirectory: String) {
-        print("Member began generating...")
         switch type {
             // TODO: Finish implementing me!
-            case .method: print(sourceForMethod())  // SourceCodeWriter.write(contents: sourceForMethod(), to: relativeOutputDirectory) 
+            case .method: print(sourceForMethod())  // SourceCodeWriter.write(contents: sourceForMethod(), to: relativeOutputDirectory)
+            case .variable: print(sourceForVariable()) 
             default: return // TODO: deal with error...
         }
-        print("Done generating from member.")
     }
 
     /**
@@ -32,7 +31,7 @@ extension Member {
     public func sourceForMethod() -> String {
         var sourceCode: String = ""
         guard type == .method else { 
-            fatalError("Request source for method type Member, but got something else instead.")
+            fatalError("Request source for method member, but got something else instead.")
         }
         for aspect in aspects {
             Member.Aspect.nextNumber()
@@ -40,8 +39,33 @@ extension Member {
             for motif in aspect.motifs {
                 MotifFactory.nextNumber()
                 switch motif {
+                    case is StringLengthMotif:
+                        sourceCode += String((motif as? StringLengthMotif)!.extrapolatedTests(aspect: aspect))
+                    case is PatternConformityMotif: 
+                        sourceCode += String((motif as? PatternConformityMotif)!.extrapolatedTests(aspect: aspect))
+                    case is ExactMatchMotif:
+                        let exactMatchMotifSource = String((motif as? ExactMatchMotif)!.extrapolatedTests(aspect: aspect))
+                        sourceCode += exactMatchMotifSource
+                    default: fatalError("Could not decipher motif.")
+                }
+            }
+        }
+        return sourceCode
+    }
+
+    public func sourceForVariable() -> String {
+        var sourceCode: String = ""
+        guard type == .variable else {
+            fatalError("Request source for variable member, but got something else instead.")
+        }
+        for aspect in aspects {
+            Member.Aspect.nextNumber()
+            // Go through all motifs and generate appropriate code...
+            for motif in aspect.motifs {
+                switch motif {
                     case is StringLengthMotif: sourceCode += String((motif as? StringLengthMotif)!.extrapolatedTests(aspect: aspect))
                     case is PatternConformityMotif: sourceCode += String((motif as? PatternConformityMotif)!.extrapolatedTests(aspect: aspect))
+                    case is ExactMatchMotif: sourceCode += String((motif as? ExactMatchMotif)!.extrapolatedTests(aspect: aspect))
                     default: fatalError("Could not decipher motif.")
                 }
             }
