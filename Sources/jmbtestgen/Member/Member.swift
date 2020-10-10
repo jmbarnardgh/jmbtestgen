@@ -52,6 +52,10 @@ public struct Member {
         case reference
     }
 
+    /**
+      A testable aspect of a Member, such as a boundary, conformity, binding,
+      size specification, whether or not the value is nil, etc. 
+     */
     public struct Aspect {
         
         var name: String

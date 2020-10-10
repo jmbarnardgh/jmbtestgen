@@ -7,12 +7,33 @@ extension Member {
     }
 
     public func generate(to relativeOutputDirectory: String) {
+        var sourceCodeString: String = ""
+        sourceCodeString += """
+import XCTest
+@testable import <#the testable import#>
+
+final class \(name.capitalizingFirstLetter())Tests: XCTestCase {
+
+
+"""
         switch type {
-            // TODO: Finish implementing me!
-            case .method: print(sourceForMethod())  // SourceCodeWriter.write(contents: sourceForMethod(), to: relativeOutputDirectory)
-            case .variable: print(sourceForVariable()) 
-            default: return // TODO: deal with error...
+            case .method: sourceCodeString += sourceForMethod()
+            case .variable: sourceCodeString += sourceForVariable()
+            default: fatalError("Could not generate from member because mebmer type could not be discerned.") // TODO: deal with error...
         }
+        var path = FileManager.default.currentDirectoryPath + "/" + relativeOutputDirectory
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true)
+        }
+        path = path + "/" + name + "Tests.swift"
+
+sourceCodeString += """
+
+}
+"""
+        let data = sourceCodeString.data(using: .utf8)
+        FileManager.default.createFile(atPath: path, contents: data)
+        // try! sourceCodeString.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
     }
 
     /**

@@ -20,15 +20,15 @@ final class jmbtestgenTests: XCTestCase {
                             description: "my method that I made",
                             tryable: false,
                             aspects: [
-                                Member.Aspect(
-                                    name: "myParam",
-                                    role: .parameter,
-                                    dataType: .string,
-                                    motifs: [
-                                        .lengthBoundaries(lower: 3, upper: 10),
-                                        .regularExpressionConformity(pattern: "^[a-zA-Z]$")
-                                    ]
-                                ),
+                                // Member.Aspect(
+                                //     name: "myParam",
+                                //     role: .parameter,
+                                //     dataType: .string,
+                                //     motifs: [
+                                //         .lengthBoundaries(lower: 3, upper: 10),
+                                //         .regularExpressionConformity(pattern: "^[a-zA-Z]$")
+                                //     ]
+                                // ),
                                 Member.Aspect(
                                     name: "anotherParam",
                                     role: .parameter,
