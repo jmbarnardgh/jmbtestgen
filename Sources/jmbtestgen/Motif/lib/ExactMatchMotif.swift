@@ -34,7 +34,7 @@ public struct ExactMatchMotif: Motif {
     }
 
     public var variations: [Variation] {
-        return [idealVariation, missingLastCharacter]
+        return [idealVariation, missingFirstCharacter, missingLastCharacter]
     }
 
 
@@ -46,6 +46,11 @@ public struct ExactMatchMotif: Motif {
     var missingLastCharacter: Variation {
         let lastDropped = String(idealVariation.value.dropLast())
         return Variation(variableNameModifier: "let", description: "lastDropped", validityVariableSetting: "false", validityExpectation: "invalid", value: lastDropped)
+    }
+
+    var missingFirstCharacter: Variation {
+        let firstDropped = String(idealVariation.value.dropFirst())
+        return Variation(variableNameModifier: "let", description: "firstDropped", validityVariableSetting: "false", validityExpectation: "invalid", value: firstDropped)
     }
 
 }
