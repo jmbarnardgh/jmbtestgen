@@ -14,12 +14,10 @@ import XCTest
 
 final class \(name.capitalizingFirstLetter())Tests: XCTestCase {
 
-
 """
         switch type {
             case .method: sourceCodeString += sourceForMethod()
             case .variable: sourceCodeString += sourceForVariable()
-            default: fatalError("Could not generate from member because mebmer type could not be discerned.") // TODO: deal with error...
         }
         var path = FileManager.default.currentDirectoryPath + "/" + relativeOutputDirectory
         if !FileManager.default.fileExists(atPath: path) {
@@ -55,7 +53,7 @@ sourceCodeString += """
             fatalError("Request source for method member, but got something else instead.")
         }
         for aspect in aspects {
-            Member.Aspect.nextNumber()
+            Aspect.nextNumber()
             // Go through all motifs and generate appropriate code...
             for motif in aspect.motifs {
                 MotifFactory.nextNumber()
@@ -80,7 +78,7 @@ sourceCodeString += """
             fatalError("Request source for variable member, but got something else instead.")
         }
         for aspect in aspects {
-            Member.Aspect.nextNumber()
+            Aspect.nextNumber()
             // Go through all motifs and generate appropriate code...
             for motif in aspect.motifs {
                 switch motif {

@@ -19,12 +19,12 @@ class Motif <<protocol>> {
     * description: String
     * idealVariation: Variation
     * variations: [Variation]
-    * func extrapolatedTests(aspect: Member.Aspect) -> String
+    * func extrapolatedTests(aspect: Aspect) -> String
     * static func currentMotif() -> Motif?
     * var dependencies: [Motif]
     ..
     * static currentMotif() : Motif? 
-    * extrapolatedTests(aspect: Member.Aspect) : String
+    * extrapolatedTests(aspect: Aspect) : String
 }
 
 class Variation <<struct>> {
@@ -72,7 +72,7 @@ class Member <<struct>> {
     * static shared : Member?
 }
 
-class Member.Aspect <<struct>> {
+class Aspect <<struct>> {
     * name : String
     * role : AspectRole
     * dataType : AspectDataType
@@ -92,8 +92,8 @@ class PatternConformityMotif <<struct>> {
 
 Manifest "1..1" o-- "0..*" Entity
 Entity "1..1" o-- "0..*" Member
-Member "1..1" o-- "0..*" Member.Aspect
-Member.Aspect "1..1" o-- "0..*" Motif
+Member "1..1" o-- "0..*" Aspect
+Aspect "1..1" o-- "0..*" Motif
 
 Motif "1..1" o-- "0..*" Variation
 

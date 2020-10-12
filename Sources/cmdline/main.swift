@@ -11,7 +11,7 @@ Manifest(
                     description: "my method that I made",
                     tryable: false,
                     aspects: [
-                        Member.Aspect(
+                        Aspect(
                             name: "param1",
                             role: .parameter,
                             dataType: .string,

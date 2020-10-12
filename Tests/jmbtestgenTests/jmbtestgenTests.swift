@@ -20,7 +20,7 @@ final class jmbtestgenTests: XCTestCase {
                             description: "my method that I made",
                             tryable: false,
                             aspects: [
-                                // Member.Aspect(
+                                // Aspect(
                                 //     name: "myParam",
                                 //     role: .parameter,
                                 //     dataType: .string,
@@ -29,7 +29,7 @@ final class jmbtestgenTests: XCTestCase {
                                 //         .regularExpressionConformity(pattern: "^[a-zA-Z]$")
                                 //     ]
                                 // ),
-                                Member.Aspect(
+                                Aspect(
                                     name: "anotherParam",
                                     role: .parameter,
                                     dataType: .string,
