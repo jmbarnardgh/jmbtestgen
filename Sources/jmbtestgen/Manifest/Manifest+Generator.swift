@@ -5,7 +5,7 @@ extension Manifest {
         for entity in entities {
             Entity.shared = entity
             Entity.nextNumber()
-            entity.generate(to: relativeOutputDirectory)
+            entity.generate(to: relativeOutputDirectory + "/" + entity.name)
         }
     }
 }

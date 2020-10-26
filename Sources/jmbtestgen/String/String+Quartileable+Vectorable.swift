@@ -23,7 +23,7 @@ extension String: Quartileable, Vectorable {
             let countDouble = Double(count)
             let quartileCountDouble = quartilePercentage * countDouble
             let quartileCountInt = Int(quartileCountDouble)
-            let startIndex = self.startIndex
+            let startIndex = self.startIndex // TODO: make this be the end of the last quartile
             let endIndex = self.index(startIndex, offsetBy: quartileCountInt - 1)
             let quartileSubsequence = self[startIndex...endIndex]
             let quartileString = String(quartileSubsequence)
@@ -40,7 +40,7 @@ extension String: Quartileable, Vectorable {
 
 infix operator .-.
 
-extension String {   
+extension String {
 
     static func - (left: String, right: String) throws -> String {
         guard right.vectorMagnitude <= left.vectorMagnitude else {

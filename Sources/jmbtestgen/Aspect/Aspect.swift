@@ -11,6 +11,8 @@ public struct Aspect {
 
     public static var num: Int = -1
 
+    public static var shared: Aspect? = nil
+
     public static func nextNumber() {
         num = num + 1
         resetTestNumberingValueForSubordinates()

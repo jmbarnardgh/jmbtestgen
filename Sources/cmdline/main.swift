@@ -1,29 +1,24 @@
 import jmbtestgen
 
 Manifest(
+    testableTargetName: "SomeApp",
     entities: [
         Entity(
-            name: "MyEntity",
+            name: "MyModel",
             members: [
                 Member(
-                    name: "myMethod",
-                    type: .method,
-                    description: "my method that I made",
+                    name: "myAccount",
+                    type: .variable,
+                    description: "my account number",
                     tryable: false,
                     aspects: [
                         Aspect(
-                            name: "param1",
-                            role: .parameter,
-                            dataType: .string,
-                            motifs: [
-                                .lengthBoundaries(lower: 3, upper: 10),
-                                .regularExpressionConformity(pattern: "^[a-zA-Z]$")
-                            ]
+                            name: "textField", role: .value, dataType: .string, motifs: [
+                                .regularExpressionConformity(pattern: "^(AA|BB){1,1}\\d{1,5}$")                            ]
                         )
                     ]
                 )
             ]
         )
     ]
-)
-.generate(to: "output/directory")
+).generate(to: "output/directory")
