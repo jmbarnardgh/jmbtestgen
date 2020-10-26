@@ -35,14 +35,16 @@ public struct PatternConformityMotif: Motif {
     public var idealVariation: Variation {
         // TODO: build the "safest" variation
         let value: String = "some value" // TODO: make this computed...
-        let v = Variation(variableNameModifier: "certainlyConforming", description: "well within pattern", validityExpectation: "valid", value: value)
+        var v = Variation(variableNameModifier: "certainlyConforming", description: "well within pattern", validityExpectation: "valid", value: value)
+        v.validityVariableSetting = "true"
         return v
     }
 
     public var variations: [Variation] {
 
         let ideal = idealVariation
-        let empty = Variation(variableNameModifier: "empty", description: "empty string", validityExpectation: "String", value: "")
+        var empty = Variation(variableNameModifier: "empty", description: "empty string", validityExpectation: "String", value: "")
+        empty.validityVariableSetting = "<#true/false#>"
         return [ideal, empty]
     }
 }
