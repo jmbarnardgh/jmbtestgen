@@ -29,7 +29,6 @@ public struct ExactMatchMotif: Motif {
     public var description: String { return "exact match" }
 
     public var idealVariation: Variation { 
-        // TODO: finish implementing me!
         return Variation(variableNameModifier: "exactMatch", description: "the ideal value for an exact match", validityVariableSetting: "true", validityExpectation: "valid", value: self.testableContent)
     }
 
@@ -83,7 +82,7 @@ public struct ExactMatchMotif: Motif {
             }
             if i == 3 {
                 quartile = String(q)
-                let v = Variation(variableNameModifier: "lastQuartile", description: "up to 4th quartile of string characters", validityVariableSetting: "false", validityExpectation: "invalid", value: quartile)
+                let v = Variation(variableNameModifier: "lastQuartile", description: "up to 4th quartile of string characters", validityVariableSetting: "true", validityExpectation: "valid", value: quartile)
                 variations.append(v)
             }
             i = i + 1
